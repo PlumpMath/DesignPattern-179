@@ -1,5 +1,7 @@
 package main;
 
+import observer.CurrentConditionsDisplay;
+import observer.WeatherData;
 import strategy.BowAndArrowBehavior;
 import strategy.King;
 import strategy.Queen;
@@ -30,6 +32,16 @@ public class Main {
 		queen.fight();
 		
 		// 王后使用远程武器，国王无法近身战斗，导致战败。
+		
+		/*************观察者模式 ****************/
+		WeatherData weatherData = new WeatherData();
+		CurrentConditionsDisplay currentConditionsDisplay = new CurrentConditionsDisplay();
+		// 注册
+		currentConditionsDisplay.register(weatherData);
+		// 更新气象信息
+		weatherData.setMeasurements(11, 22, 33);
+		// 取消注册
+		currentConditionsDisplay.unregister(weatherData);
 	}
 
 }
