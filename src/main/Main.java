@@ -1,5 +1,8 @@
 package main;
 
+import decorator.Beverage;
+import decorator.Espresso;
+import decorator.Mocha;
 import observer.CurrentConditionsDisplay;
 import observer.WeatherData;
 import strategy.BowAndArrowBehavior;
@@ -42,6 +45,14 @@ public class Main {
 		weatherData.setMeasurements(11, 22, 33);
 		// 取消注册
 		currentConditionsDisplay.unregister(weatherData);
+		
+		/*************装饰者模式 ****************/
+		// 创建咖啡实例
+		Beverage beverage = new Espresso();
+		// 添加调料（装饰）
+		beverage = new Mocha(beverage);
+		// 计算价钱
+		System.out.println("Total cost:" + beverage.cost());
 	}
 
 }
