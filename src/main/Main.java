@@ -3,6 +3,14 @@ package main;
 import decorator.Beverage;
 import decorator.Espresso;
 import decorator.Mocha;
+import factory.SenderFactory;
+import factory.Sender;
+import factory.AbstractFactory;
+import factory.Factory;
+import factory.MailFactory;
+import factory.Receiver;
+import factory.SimpleFactory;
+import factory.StaticFactory;
 import observer.CurrentConditionsDisplay;
 import observer.WeatherData;
 import strategy.BowAndArrowBehavior;
@@ -53,6 +61,35 @@ public class Main {
 		beverage = new Mocha(beverage);
 		// 计算价钱
 		System.out.println("Total cost:" + beverage.cost());
+		
+		/*************工厂模式 ****************/
+		// 简单工厂
+		Factory factory;
+		Sender sender;
+		Receiver receiver;
+		SimpleFactory simpleFactory = new SimpleFactory();
+		sender = simpleFactory.produce("mail");
+		sender.send();
+		sender = simpleFactory.produce("sms");
+		sender.send();
+		
+		// 静态工厂，缺点：不能通过继承来改变创建方法的行为
+		sender = StaticFactory.produce("mail");
+		sender.send();
+		sender = StaticFactory.produce("sms");
+		sender.send();
+		
+		// 工厂方法
+		factory = new SenderFactory();
+		sender = factory.createSender();
+		sender.send();
+		
+		// 抽象工厂
+		AbstractFactory abstractFactory = new MailFactory();
+		sender = abstractFactory.createSender();
+		receiver = abstractFactory.createReceiver();
+		sender.send();
+		receiver.receive();
 	}
 
 }
