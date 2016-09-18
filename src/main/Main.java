@@ -3,16 +3,20 @@ package main;
 import decorator.Beverage;
 import decorator.Espresso;
 import decorator.Mocha;
-import factory.SenderFactory;
-import factory.Sender;
 import factory.AbstractFactory;
 import factory.Factory;
 import factory.MailFactory;
 import factory.Receiver;
+import factory.Sender;
+import factory.SenderFactory;
 import factory.SimpleFactory;
 import factory.StaticFactory;
 import observer.CurrentConditionsDisplay;
 import observer.WeatherData;
+import singleton.DoubleLockSingleTon;
+import singleton.EagerlySingleTon;
+import singleton.EnumSingleTon;
+import singleton.InnerClassSingleTon;
 import strategy.BowAndArrowBehavior;
 import strategy.King;
 import strategy.Queen;
@@ -90,6 +94,27 @@ public class Main {
 		receiver = abstractFactory.createReceiver();
 		sender.send();
 		receiver.receive();
+		
+		/*************单例模式 ****************/
+		// java 1.2 版本之前需要建立单件注册表，以免垃圾收集器将单件回收
+
+		String type;
+		
+		// 饿汉
+		type = EagerlySingleTon.getIntance().getClass().getSimpleName();
+		System.out.println(type);
+		
+		// 双重锁定(懒汉的升级版本)
+		type = DoubleLockSingleTon.getIntance().getClass().getSimpleName();
+		System.out.println(type);
+		
+		// 内部类
+		type = InnerClassSingleTon.getIntance().getClass().getSimpleName();
+		System.out.println(type);
+		
+		// 枚举
+		type = EnumSingleTon.INTANCE.getClass().getSimpleName();
+		System.out.println(type);
 	}
 
 }
