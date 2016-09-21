@@ -1,5 +1,9 @@
 package main;
 
+import command.Controller;
+import command.LightOffCommand;
+import command.LightOnCommand;
+import command.TableLight;
 import decorator.Beverage;
 import decorator.Espresso;
 import decorator.Mocha;
@@ -115,6 +119,16 @@ public class Main {
 		// Ã¶¾Ù
 		type = EnumSingleTon.INTANCE.getClass().getSimpleName();
 		System.out.println(type);
+		
+		/*************ÃüÁîÄ£Ê½ ****************/
+		TableLight tableLight = new TableLight();
+		LightOnCommand lightOnCommand = new LightOnCommand(tableLight);
+		LightOffCommand lightOffCommand = new LightOffCommand(tableLight);
+		Controller controller = new Controller();
+		controller.setCommand(lightOnCommand);
+		controller.doExecute();
+		controller.setCommand(lightOffCommand);
+		controller.doExecute();
 	}
 
 }
