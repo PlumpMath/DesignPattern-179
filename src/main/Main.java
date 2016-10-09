@@ -1,5 +1,7 @@
 package main;
 
+import adapter.BlueTurkey;
+import adapter.Duck;
 import command.Controller;
 import command.LightOffCommand;
 import command.LightOnCommand;
@@ -129,6 +131,12 @@ public class Main {
 		controller.doExecute();
 		controller.setCommand(lightOffCommand);
 		controller.doExecute();
+		
+		/*************  ≈‰∆˜ƒ£ Ω ****************/
+		BlueTurkey blueTurkey = new BlueTurkey();
+		Duck turkeyAdapter = new adapter.TurkeyAdapter(blueTurkey);
+		turkeyAdapter.quack();
+		turkeyAdapter.fly();
 	}
 
 }
