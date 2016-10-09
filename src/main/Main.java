@@ -9,6 +9,7 @@ import command.TableLight;
 import decorator.Beverage;
 import decorator.Espresso;
 import decorator.Mocha;
+import facade.RemoteController;
 import factory.AbstractFactory;
 import factory.Factory;
 import factory.MailFactory;
@@ -137,6 +138,11 @@ public class Main {
 		Duck turkeyAdapter = new adapter.TurkeyAdapter(blueTurkey);
 		turkeyAdapter.quack();
 		turkeyAdapter.fly();
+		
+		/*************外观模式 ****************/
+		RemoteController remoteController = new RemoteController();
+		remoteController.watchTV();
+		remoteController.closeTV();
 	}
 
 }
